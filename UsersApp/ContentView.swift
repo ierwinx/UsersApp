@@ -1,21 +1,23 @@
-//
-//  ContentView.swift
-//  UsersApp
-//
-//  Created by Erwin Luz León on 26/08/22.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var login: LoginViewModel
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Group {
+            if login.bShowUsers {
+                ListUsersView()
+            } else {
+                LoginView()
+            }
+        }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(LoginViewModel())
     }
 }

@@ -41,6 +41,9 @@ struct ListUsersView: View {
                             .padding()
                         }
                     }
+                    .refreshable {
+                        listUsersViewModel.getUsers()
+                    }
                     
                 }
                 

@@ -16,7 +16,7 @@ class ListUsersViewModel: ObservableObject {
         getUsers()
     }
     
-    private func getUsers() {
+    public func getUsers() {
         let arrhearders = [HeadersRequest(value: "application/json", key: "Content-Type")]
         BaseRequests.sendResponse(strUrl: URLs.listUsers, method: .GET, arrHeardes: arrhearders, objBody: EmptyObject()) { (objResp: ListUsersModelResponse?, error) in
             if error.code == 0, let arrdata = objResp?.data {

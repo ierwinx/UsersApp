@@ -20,9 +20,11 @@ struct DetailUserView: View {
                 Spacer()
                     .frame(height: 30)
                 
-                Image("")
-                    .getImageFromWeb(strUrl: detailUserViewModel.usuario?.avatar ?? "")
-                    .resizable()
+                AsyncImage(url: URL(string: detailUserViewModel.usuario?.avatar ?? "")) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
                     .scaledToFit()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 150, height: 150, alignment: .center)

@@ -23,9 +23,11 @@ struct ListUsersView: View {
                         
                         NavigationLink(destination: DetailUserView(idUser: user.id)) {
                             HStack {
-                                Image("")
-                                    .getImageFromWeb(strUrl: user.avatar)
-                                    .resizable()
+                                AsyncImage(url: URL(string: user.avatar)){ image in
+                                    image.resizable()
+                                } placeholder: {
+                                    ProgressView()
+                                }
                                     .scaledToFit()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 80, height: 80, alignment: .center)

@@ -1,3 +1,4 @@
+import SwiftUI
 import Combine
 import Foundation
 
@@ -22,8 +23,10 @@ class LoginViewModel: ObservableObject {
     }
     @Published var bShowUsers = false
     
+    @AppStorage("com.bugsoft.userapp.sessionToken") var sessionToken: String?
+    
     init() {
-        if UserDefaults.standard.string(forKey: "sessionToken") != nil {
+        if sessionToken != nil {
             bShowUsers = true
         } else {
             bShowUsers = false
@@ -37,7 +40,7 @@ class LoginViewModel: ObservableObject {
         BaseRequests.sendResponse(strUrl: URLs.login, method: .POST, arrHeardes: arrhearders, objBody: objSend) { (objResp: LoginResponse?, error) in
             if error.code == 0, let strToken = objResp?.token {
                 self.bShowUsers = true
-                UserDefaults.standard.set(strToken, forKey: "sessionToken")
+                self.sessionToken = strToken
             } else {
                 self.bShowUsers = false
                 self.strError = objResp?.error ?? ""

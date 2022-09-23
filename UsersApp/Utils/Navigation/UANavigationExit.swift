@@ -1,9 +1,12 @@
 import SwiftUI
 
 struct UANavigationExit: View {
+    
+    @AppStorage("com.bugsoft.userapp.sessionToken") var sessionToken: String?
+    
     var body: some View {
         Button {
-            UserDefaults.standard.removeObject(forKey: "sessionToken")
+            sessionToken = nil
         } label: {
             Text("Salir")
                 .font(.title2)
